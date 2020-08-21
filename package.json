@@ -20,7 +20,7 @@
     "foodka"
   ],
   "engines": {
-    "node": "10.7.0"
+    "node": "14.4.0"
   },
   "author": "Joshim Uddin",
   "license": "ISC",
@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/Joshimcse/FoodKa#readme",
   "dependencies": {
-    "bcrypt": "4.0.0",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cloudinary": "^1.22.0",
     "concurrently": "^5.3.0",
