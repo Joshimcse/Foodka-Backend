@@ -26,6 +26,16 @@ app.use(cookieParser());
 
 // Error handling Middleware
 
+/** routes configuration */
+app.get('/', (req, res) => {
+  res.status(200).json({
+    msg: `Magic happens on port ${port}`
+  })
+})
+// auth routes
+app.use('/api/v1/auth', (req, res) => {});
+// public routes
+
 // listen for request
 const port = process.env.PORT || 3007;
 
