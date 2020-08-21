@@ -7,10 +7,7 @@
   "scripts": {
     "test": "mocha",
     "start": "node server.js",
-    "server": "nodemon server.js",
-    "client": "npm run start --prefix client",
-    "dashboard": "npm run start --prefix dashboard",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
