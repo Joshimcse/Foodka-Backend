@@ -1,0 +1,14 @@
+/node_modules
+
+foodka-api-documentation.json
+
+.DS_Store
+.env
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+admin.js
+package-lock.json
+endpoint

@@ -1,0 +1,59 @@
+{
+  "name": "foodka-backend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "online based restaurant",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm run start --prefix client",
+    "dashboard": "npm run start --prefix dashboard",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joshimcse/FoodKa.git"
+  },
+  "keywords": [
+    "ecommerce",
+    "restaurant",
+    "fast-food",
+    "foodka"
+  ],
+  "engines": {
+    "node": "10.7.0"
+  },
+  "author": "Joshim Uddin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Joshimcse/FoodKa/issues"
+  },
+  "homepage": "https://github.com/Joshimcse/FoodKa#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "cloudinary": "^1.22.0",
+    "concurrently": "^5.3.0",
+    "cookie-parser": "^1.4.5",
+    "crypto-js": "^4.0.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-formidable": "^1.2.0",
+    "gravatar": "^1.8.1",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.27.0",
+    "mongoose": "^5.10.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "nodemailer": "^6.4.11",
+    "validator": "^13.1.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.1.1",
+    "nodemon": "^2.0.4",
+    "superagent": "^6.0.0"
+  }
+}
