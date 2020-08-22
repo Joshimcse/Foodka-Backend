@@ -15,6 +15,55 @@ const {
 } = require("../validator/validator");
 
 /**
+ * @controller Register
+ * @desc register a users to the database...
+ * @return
+ */
+const registerController = (req, res) => {
+  const { isValid, errors, data } = validateRegisterInput(req.body);
+
+  if (!isValid) {
+    return res.status(422).json({ success: false, errors: errors });
+  }
+
+  let { firstName, lastName, email, password, phone } = data;
+
+  User.findOne({ $or: [{ email }, { phone }] })
+    .then((user) => {
+      if (user) {
+        if (email == user.email) {
+          errors.email = "Email already exist";
+        }
+
+        if (phone == user.phone) {
+          errors.phone = "Phone Number already exist";
+        }
+
+        return res.status(409).json({ success: false, errors: errors });
+      }
+
+      const newUser = new User({
+        email,
+        phone,
+        password,
+        profile: {
+          firstName,
+          lastName,
+        },
+      });
+
+      newUser
+        .save()
+        .then((user) => res.status(201).json({ success: true, user }))
+        .catch((err) => res.status(204).json({ success: false, errors: err }));
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({ success: false, errors: err });
+    });
+};
+
+/**
  * @controller loginController
  * @desc check provided info, If all information is valid then generated a token.
  * @return
@@ -54,7 +103,7 @@ const loginController = (req, res) => {
         user.generateToken((err, user) => {
           if (err) return res.status(400).send(err);
           res
-            .cookie('w_auth', user.token)
+            .cookie("w_auth", user.token)
             .status(200)
             .json({ isLoggedIn: true, token: user.token });
         });
@@ -101,4 +150,5 @@ module.exports = {
   authInfoController,
   logoutController,
   loginController,
+  registerController,
 };

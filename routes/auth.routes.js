@@ -13,17 +13,25 @@ const { isAuth } = require("../middleware/auth");
 
 //Controller functionality
 const {
+  registerController,
+  loginController,
   authInfoController,
   logoutController,
-  loginController
 } = require("../controllers/auth.controllers");
 
 /**
- * @route  POST api/users/login
+ * @route  POST api/users/register
+ * @desc   Register an user
+ * @access Public
+ */
+router.post("/signup", registerController);
+
+/**
+ * @route  POST /api/v1/auth/login
  * @desc   Send user info to server && check it valid or not.
  * @access Public
  */
-router.post('/login', loginController);
+router.post("/login", loginController);
 
 /**
  * @route  GET /api/v1/auth/user-info
@@ -33,8 +41,8 @@ router.post('/login', loginController);
 router.get("/user-info", isAuth, authInfoController);
 
 /**
- * @route  GET api/users/logout
- * @desc   
+ * @route  GET /api/v1/auth/logout
+ * @desc
  * @access private
  */
 router.get("/logout", isAuth, logoutController);

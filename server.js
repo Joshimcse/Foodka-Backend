@@ -9,10 +9,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+var cors = require("cors");
 
 // set up express app
 const app = express();
 
+// enable cors for all request
+app.use(cors());
 // configure morgan for loggin
 app.use(require("morgan")("dev"));
 // .env configuration
@@ -27,13 +30,13 @@ app.use(cookieParser());
 // Error handling Middleware
 
 /** routes configuration */
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   res.status(200).json({
-    msg: `Magic happens on port: ${port}`
-  })
-})
+    msg: `Magic happens on port: ${port}`,
+  });
+});
 // auth routes
-app.use('/api/v1/auth', require('./routes/auth.routes'));
+app.use("/api/v1/auth", require("./routes/auth.routes"));
 // public routes
 
 // listen for request

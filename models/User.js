@@ -40,7 +40,6 @@ const UserSchema = new Schema({
     },
     avatar: {
       type: String,
-      required: true,
     },
     address: {
       local: { type: String, default: "" },
@@ -116,7 +115,19 @@ UserSchema.methods.generateResetToken = function (cb) {
 
 UserSchema.methods.generateToken = function (cb) {
   let user = this;
-  let token = jwt.sign(user._id.toHexString(), process.env.SECRET);
+  let { _id, email, profile, cart } = user;
+  // let token = jwt.sign(user._id.toHexString(),  process.env.SECRET , { algorithm: 'RS256' });
+
+  const secret = "secret";
+  const token = jwt.sign(
+    {
+      _id,
+      email,
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+    },
+    process.env.JWT_PRIVATE_KEY
+  );
 
   user.token = token;
   user.save((err, user) => {
@@ -127,8 +138,8 @@ UserSchema.methods.generateToken = function (cb) {
 
 UserSchema.statics.findByToken = function (token, cb) {
   let user = this;
-  jwt.verify(token, process.env.SECRET, (err, decode) => {
-    user.findOne({ _id: decode, token: token }, (err, user) => {
+  jwt.verify(token, process.env.JWT_PRIVATE_KEY, (err, decode) => {
+    user.findOne({ _id: decode._id, token: token }, (err, user) => {
       if (err) return cb(err);
       cb(null, user);
     });
